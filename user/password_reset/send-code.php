@@ -12,7 +12,7 @@ if (!$email) {
 }
 
 // 1. Krok: Ověření, zda e-mail existuje v databázi
-$uzivatel = $db->get("SELECT id FROM users WHERE email = ?", [$email]);
+$uzivatel = $db->getOne("SELECT id FROM users WHERE email = ?", [$email]);
 
 if (empty($uzivatel)) {
     echo "<p>❌ E-mail nebyl nalezen. Zkontrolujte prosím zadanou adresu.</p>";

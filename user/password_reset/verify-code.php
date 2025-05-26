@@ -12,7 +12,7 @@ if (!$email || !$code) { // Zjednodušeno pro lepší čitelnost
 }   
 
 // Ověření v databázi
-$uzivatel = $db->get("SELECT * FROM users WHERE email = ? AND reset_token = ? AND reset_expires > NOW()", [
+$uzivatel = $db->getOne("SELECT * FROM users WHERE email = ? AND reset_token = ? AND reset_expires > NOW()", [
     $email, $code
 ]);
 

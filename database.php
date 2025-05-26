@@ -23,11 +23,19 @@ class DB {
         return $stmt->execute($values);
     }
 
-    // SELECT
+    // SELECT LIST
     public function getAll($sql, $values = []) {
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute($values);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    
+    // SELECT ONE   
+    public function getOne($sql, $params = []) {
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute($params);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
     // LOG
@@ -36,10 +44,5 @@ class DB {
         $this->run($sql, [$user_id, $action, $detail]);
     }
 
-    public function getOne($sql, $params = []) {
-        $stmt = $this->pdo->prepare($sql);
-        $stmt->execute($params);
-        return $stmt->fetch(PDO::FETCH_ASSOC);
-    }
 }
 ?>
