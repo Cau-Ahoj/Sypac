@@ -37,14 +37,50 @@ function chooseShell(e) {
   shellSelected = true;
   gameReady = false;
 
+  // Náhodná výhra
   const reward = rewards[Math.floor(Math.random() * rewards.length)];
-  document.getElementById('reward').innerText = `Vyhrál jsi: ${reward}`;
-  console.log(`Vyhrál jsi: ${reward}`);
 
+  if (!reward) {
+    console.error('Chyba při výběru výhry.');
+    document.getElementById('reward').innerText = 'Výhra nenalezena.';
+    return;
+  }
+
+  // Zobrazit výhru
+  document.getElementById('reward').innerText = `Vyhrál jsi: ${reward.name}`;
+  console.log(`Vyhrál jsi: ${reward.name}`);
+
+  // Zakázat tlačítka
   document.querySelectorAll('.shell').forEach(btn => btn.disabled = true);
   document.getElementById('startBtn').disabled = false;
+
+  // Odeslat výhru na server
+  // Odeslat výhru na server s user_id = 1
+fetch('validate.php', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({
+    user_id: 1,
+    reward_id: reward.id
+  })
+})
+.then(res => res.json())
+.then(data => {
+  if (!data.success) {
+    console.error('Nepodařilo se uložit výhru:', data.error);
+  } else {
+    console.log('Výhra úspěšně zapsána do databáze.');
+  }
+})
+.catch(error => {
+  console.error('Chyba při ukládání výhry:', error);
+});
+
 }
 
+// Přiřazení obsluhy kliknutí ke všem skořápkám
 document.querySelectorAll('.shell').forEach(btn => {
   btn.addEventListener('click', chooseShell);
 });
