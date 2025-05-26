@@ -5,9 +5,9 @@ class DB {
     // DATABASE CONNECTION
     public function __construct() {
         $host = 'localhost';
-        $dbname = 'casino_db';
-        $user = 'root';
-        $pass = '';
+        $dbname = 'varga_casino_db';
+        $user = 'varga';
+        $pass = '5QJDkbddFKtahDdy';
 
         try {
             $this->pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $user, $pass);
@@ -35,5 +35,12 @@ class DB {
         $sql = "INSERT INTO logs VALUES (NULL, ?, ?, ?, NOW())";
         $this->run($sql, [$user_id, $action, $detail]);
     }
+
+    public function getOne($sql, $params = []) {
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute($params);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+    
 }
 ?>
