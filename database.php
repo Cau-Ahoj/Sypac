@@ -24,7 +24,7 @@ class DB {
     }
 
     // SELECT
-    public function get($sql, $values = []) {
+    public function getAll($sql, $values = []) {
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute($values);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -34,6 +34,12 @@ class DB {
     public function log($user_id, $action, $detail) {
         $sql = "INSERT INTO logs VALUES (NULL, ?, ?, ?, NOW())";
         $this->run($sql, [$user_id, $action, $detail]);
+    }
+
+    public function getOne($sql, $params = []) {
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute($params);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 }
 ?>
