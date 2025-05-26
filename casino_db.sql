@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Počítač: 127.0.0.1
--- Vytvořeno: Ned 25. kvě 2025, 11:43
+-- Vytvořeno: Pon 26. kvě 2025, 22:21
 -- Verze serveru: 10.4.32-MariaDB
 -- Verze PHP: 8.2.12
 
@@ -81,6 +81,25 @@ CREATE TABLE `purchases` (
 -- --------------------------------------------------------
 
 --
+-- Struktura tabulky `slot_results`
+--
+
+CREATE TABLE `slot_results` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `slot1` varchar(10) DEFAULT NULL,
+  `slot2` varchar(10) DEFAULT NULL,
+  `slot3` varchar(10) DEFAULT NULL,
+  `result_text` text DEFAULT NULL,
+  `win_amount` int(11) DEFAULT NULL,
+  `spin_cost` int(11) DEFAULT NULL,
+  `credit_after` int(11) DEFAULT NULL,
+  `created_at` datetime DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Struktura tabulky `users`
 --
 
@@ -130,6 +149,13 @@ ALTER TABLE `purchases`
   ADD KEY `item_id` (`item_id`);
 
 --
+-- Indexy pro tabulku `slot_results`
+--
+ALTER TABLE `slot_results`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`);
+
+--
 -- Indexy pro tabulku `users`
 --
 ALTER TABLE `users`
@@ -166,6 +192,12 @@ ALTER TABLE `purchases`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT pro tabulku `slot_results`
+--
+ALTER TABLE `slot_results`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT pro tabulku `users`
 --
 ALTER TABLE `users`
@@ -187,6 +219,12 @@ ALTER TABLE `logs`
 ALTER TABLE `purchases`
   ADD CONSTRAINT `purchases_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `purchases_ibfk_2` FOREIGN KEY (`item_id`) REFERENCES `items` (`id`) ON DELETE CASCADE;
+
+--
+-- Omezení pro tabulku `slot_results`
+--
+ALTER TABLE `slot_results`
+  ADD CONSTRAINT `slot_results_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
