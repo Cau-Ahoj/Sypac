@@ -14,7 +14,7 @@
 
   <p id="reward"></p>
 
-  <button id="startBtn" disabled>Začít hru</button>
+  <button id="startBtn">Začít hru</button>
 
   <script src="script.js"></script>
 
