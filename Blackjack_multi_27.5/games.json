@@ -1,0 +1,625 @@
+{
+    "game_2a8c": [
+        "LukasKukkuk",
+        "LukasMobil"
+    ],
+    "game_ee30df19": {
+        "players": [
+            "LukasKukkuk",
+            "LukasMobil"
+        ],
+        "public": true
+    },
+    "game_ec4faa11": {
+        "players": [
+            "LukasKukkuk",
+            "LukasMobil"
+        ],
+        "public": false,
+        "left": [
+            "LukasKukkuk",
+            "LukasKukkuk",
+            "LukasKukkuk",
+            "LukasKukkuk"
+        ],
+        "chat": [
+            {
+                "from": "SYSTEM",
+                "text": "LukasKukkuk opustil hru."
+            },
+            {
+                "from": "SYSTEM",
+                "text": "LukasKukkuk opustil hru."
+            },
+            {
+                "from": "SYSTEM",
+                "text": "LukasKukkuk opustil hru."
+            },
+            {
+                "from": "SYSTEM",
+                "text": "LukasKukkuk opustil hru."
+            }
+        ]
+    },
+    "game_d3bad0dc": {
+        "players": [
+            "LukasMobil",
+            "LukasPC"
+        ],
+        "public": true,
+        "left": [
+            "LukasPC",
+            "LukasPC",
+            "LukasPC",
+            "LukasPC",
+            "LukasPC",
+            "LukasPC",
+            "LukasPC",
+            "LukasPC",
+            "LukasPC",
+            "LukasPC",
+            "LukasPC",
+            "LukasPC",
+            "LukasPC",
+            "LukasPC",
+            "LukasPC",
+            "LukasPC",
+            "LukasPC",
+            "LukasPC",
+            "LukasPC",
+            "LukasPC",
+            "LukasPC",
+            "LukasPC",
+            "LukasPC",
+            "LukasPC",
+            "LukasPC",
+            "LukasPC",
+            "LukasPC",
+            "LukasPC",
+            "LukasPC",
+            "LukasPC",
+            "LukasPC",
+            "LukasPC",
+            "LukasPC",
+            "LukasPC",
+            "LukasPC",
+            "LukasPC",
+            "LukasPC",
+            "LukasPC",
+            "LukasPC",
+            "LukasPC",
+            "LukasPC",
+            "LukasPC",
+            "LukasPC",
+            "LukasPC",
+            "LukasPC",
+            "LukasPC",
+            "LukasPC",
+            "LukasPC",
+            "LukasPC",
+            "LukasPC"
+        ],
+        "chat": [
+            {
+                "from": "SYSTEM",
+                "text": "LukasPC opustil hru."
+            },
+            {
+                "from": "SYSTEM",
+                "text": "LukasPC opustil hru."
+            },
+            {
+                "from": "SYSTEM",
+                "text": "LukasPC opustil hru."
+            },
+            {
+                "from": "SYSTEM",
+                "text": "LukasPC opustil hru."
+            },
+            {
+                "from": "SYSTEM",
+                "text": "LukasPC opustil hru."
+            },
+            {
+                "from": "LukasPC",
+                "text": "a"
+            },
+            {
+                "from": "SYSTEM",
+                "text": "LukasPC opustil hru."
+            },
+            {
+                "from": "SYSTEM",
+                "text": "LukasPC opustil hru."
+            },
+            {
+                "from": "SYSTEM",
+                "text": "LukasPC opustil hru."
+            },
+            {
+                "from": "SYSTEM",
+                "text": "LukasPC opustil hru."
+            },
+            {
+                "from": "SYSTEM",
+                "text": "LukasPC opustil hru."
+            },
+            {
+                "from": "SYSTEM",
+                "text": "LukasPC opustil hru."
+            },
+            {
+                "from": "SYSTEM",
+                "text": "LukasPC opustil hru."
+            },
+            {
+                "from": "SYSTEM",
+                "text": "LukasPC opustil hru."
+            },
+            {
+                "from": "SYSTEM",
+                "text": "LukasPC opustil hru."
+            },
+            {
+                "from": "SYSTEM",
+                "text": "LukasPC opustil hru."
+            },
+            {
+                "from": "SYSTEM",
+                "text": "LukasPC opustil hru."
+            },
+            {
+                "from": "SYSTEM",
+                "text": "LukasPC opustil hru."
+            },
+            {
+                "from": "SYSTEM",
+                "text": "LukasPC opustil hru."
+            },
+            {
+                "from": "SYSTEM",
+                "text": "LukasPC opustil hru."
+            },
+            {
+                "from": "SYSTEM",
+                "text": "LukasPC opustil hru."
+            },
+            {
+                "from": "SYSTEM",
+                "text": "LukasPC opustil hru."
+            },
+            {
+                "from": "SYSTEM",
+                "text": "LukasPC opustil hru."
+            },
+            {
+                "from": "SYSTEM",
+                "text": "LukasPC opustil hru."
+            },
+            {
+                "from": "SYSTEM",
+                "text": "LukasPC opustil hru."
+            },
+            {
+                "from": "SYSTEM",
+                "text": "LukasPC opustil hru."
+            },
+            {
+                "from": "SYSTEM",
+                "text": "LukasPC opustil hru."
+            },
+            {
+                "from": "SYSTEM",
+                "text": "LukasPC opustil hru."
+            },
+            {
+                "from": "SYSTEM",
+                "text": "LukasPC opustil hru."
+            },
+            {
+                "from": "SYSTEM",
+                "text": "LukasPC opustil hru."
+            },
+            {
+                "from": "SYSTEM",
+                "text": "LukasPC opustil hru."
+            },
+            {
+                "from": "SYSTEM",
+                "text": "LukasPC opustil hru."
+            },
+            {
+                "from": "SYSTEM",
+                "text": "LukasPC opustil hru."
+            },
+            {
+                "from": "SYSTEM",
+                "text": "LukasPC opustil hru."
+            },
+            {
+                "from": "SYSTEM",
+                "text": "LukasPC opustil hru."
+            },
+            {
+                "from": "SYSTEM",
+                "text": "LukasPC opustil hru."
+            },
+            {
+                "from": "SYSTEM",
+                "text": "LukasPC opustil hru."
+            },
+            {
+                "from": "SYSTEM",
+                "text": "LukasPC opustil hru."
+            },
+            {
+                "from": "SYSTEM",
+                "text": "LukasPC opustil hru."
+            },
+            {
+                "from": "SYSTEM",
+                "text": "LukasPC opustil hru."
+            },
+            {
+                "from": "SYSTEM",
+                "text": "LukasPC opustil hru."
+            },
+            {
+                "from": "SYSTEM",
+                "text": "LukasPC opustil hru."
+            },
+            {
+                "from": "SYSTEM",
+                "text": "LukasPC opustil hru."
+            },
+            {
+                "from": "SYSTEM",
+                "text": "LukasPC opustil hru."
+            },
+            {
+                "from": "SYSTEM",
+                "text": "LukasPC opustil hru."
+            },
+            {
+                "from": "SYSTEM",
+                "text": "LukasPC opustil hru."
+            },
+            {
+                "from": "SYSTEM",
+                "text": "LukasPC opustil hru."
+            },
+            {
+                "from": "SYSTEM",
+                "text": "LukasPC opustil hru."
+            },
+            {
+                "from": "SYSTEM",
+                "text": "LukasPC opustil hru."
+            },
+            {
+                "from": "SYSTEM",
+                "text": "LukasPC opustil hru."
+            },
+            {
+                "from": "SYSTEM",
+                "text": "LukasPC opustil hru."
+            }
+        ],
+        "turn": "LukasMobil"
+    },
+    "game_060fad19": {
+        "players": [
+            "Lukas",
+            "LukasMobil"
+        ],
+        "public": true,
+        "turn": "LukasMobil"
+    },
+    "game_5e5047e9": {
+        "players": [
+            "Lukas",
+            "LukasM"
+        ],
+        "public": true
+    },
+    "game_194e3f90": {
+        "players": [
+            "LukasKiller",
+            "LukasMobil"
+        ],
+        "public": true
+    },
+    "game_5ae06877": {
+        "players": [
+            "LukasKukkuk",
+            "LukasMobil"
+        ],
+        "public": true
+    },
+    "game_ef514063": {
+        "players": [
+            "LukasKukkuk",
+            "Babu"
+        ],
+        "public": false
+    },
+    "game_940dec86": {
+        "players": [
+            "LukasKukkuk",
+            "babu"
+        ],
+        "public": true,
+        "chat": [
+            {
+                "from": "LukasKukkuk",
+                "text": "Test"
+            },
+            {
+                "from": "LukasKukkuk",
+                "text": "\u010cas: 27.5 17:06"
+            }
+        ]
+    },
+    "game_ae8f04b6": {
+        "players": [
+            "babu",
+            "LukasKukkuk"
+        ],
+        "public": true
+    },
+    "game_feda14d5": {
+        "players": [
+            "babu",
+            "LukasKukkuk"
+        ],
+        "public": true
+    },
+    "game_02eb6911": {
+        "players": [
+            "LukasKiller",
+            "LukasKukkuk"
+        ],
+        "public": true
+    },
+    "game_a3af05f7": {
+        "players": [
+            "LukasKiller",
+            "babu"
+        ],
+        "public": true,
+        "hands": {
+            "LukasKiller": [
+                {
+                    "value": 5,
+                    "suit": "\u2665"
+                },
+                {
+                    "value": 2,
+                    "suit": "\u2663"
+                },
+                {
+                    "value": 10,
+                    "suit": "\u2663"
+                }
+            ],
+            "Dealer": [],
+            "babu": [
+                {
+                    "value": 7,
+                    "suit": "\u2663"
+                }
+            ]
+        },
+        "stood": {
+            "LukasKiller": true
+        },
+        "turn": "babu",
+        "done": false,
+        "deck": [
+            {
+                "value": 4,
+                "suit": "\u2660"
+            },
+            {
+                "value": 11,
+                "suit": "\u2663"
+            },
+            {
+                "value": 10,
+                "suit": "\u2666"
+            },
+            {
+                "value": 9,
+                "suit": "\u2660"
+            },
+            {
+                "value": 10,
+                "suit": "\u2660"
+            },
+            {
+                "value": 9,
+                "suit": "\u2663"
+            },
+            {
+                "value": 10,
+                "suit": "\u2665"
+            },
+            {
+                "value": 6,
+                "suit": "\u2666"
+            },
+            {
+                "value": 10,
+                "suit": "\u2663"
+            },
+            {
+                "value": 8,
+                "suit": "\u2665"
+            },
+            {
+                "value": 11,
+                "suit": "\u2666"
+            },
+            {
+                "value": 10,
+                "suit": "\u2666"
+            },
+            {
+                "value": 11,
+                "suit": "\u2660"
+            },
+            {
+                "value": 10,
+                "suit": "\u2666"
+            },
+            {
+                "value": 10,
+                "suit": "\u2666"
+            },
+            {
+                "value": 2,
+                "suit": "\u2660"
+            },
+            {
+                "value": 10,
+                "suit": "\u2665"
+            },
+            {
+                "value": 3,
+                "suit": "\u2663"
+            },
+            {
+                "value": 2,
+                "suit": "\u2665"
+            },
+            {
+                "value": 10,
+                "suit": "\u2660"
+            },
+            {
+                "value": 8,
+                "suit": "\u2666"
+            },
+            {
+                "value": 10,
+                "suit": "\u2665"
+            },
+            {
+                "value": 4,
+                "suit": "\u2665"
+            },
+            {
+                "value": 10,
+                "suit": "\u2663"
+            },
+            {
+                "value": 3,
+                "suit": "\u2665"
+            },
+            {
+                "value": 7,
+                "suit": "\u2660"
+            },
+            {
+                "value": 11,
+                "suit": "\u2665"
+            },
+            {
+                "value": 10,
+                "suit": "\u2660"
+            },
+            {
+                "value": 3,
+                "suit": "\u2666"
+            },
+            {
+                "value": 4,
+                "suit": "\u2663"
+            },
+            {
+                "value": 10,
+                "suit": "\u2665"
+            },
+            {
+                "value": 5,
+                "suit": "\u2666"
+            },
+            {
+                "value": 6,
+                "suit": "\u2663"
+            },
+            {
+                "value": 6,
+                "suit": "\u2660"
+            },
+            {
+                "value": 9,
+                "suit": "\u2666"
+            },
+            {
+                "value": 4,
+                "suit": "\u2666"
+            },
+            {
+                "value": 8,
+                "suit": "\u2663"
+            },
+            {
+                "value": 9,
+                "suit": "\u2665"
+            },
+            {
+                "value": 10,
+                "suit": "\u2663"
+            },
+            {
+                "value": 7,
+                "suit": "\u2666"
+            },
+            {
+                "value": 3,
+                "suit": "\u2660"
+            },
+            {
+                "value": 5,
+                "suit": "\u2663"
+            },
+            {
+                "value": 10,
+                "suit": "\u2660"
+            },
+            {
+                "value": 8,
+                "suit": "\u2660"
+            },
+            {
+                "value": 2,
+                "suit": "\u2666"
+            },
+            {
+                "value": 5,
+                "suit": "\u2660"
+            },
+            {
+                "value": 7,
+                "suit": "\u2665"
+            },
+            {
+                "value": 6,
+                "suit": "\u2665"
+            }
+        ]
+    },
+    "game_b1a81ce3": {
+        "players": [
+            "admin"
+        ],
+        "public": false
+    },
+    "game_56478666": {
+        "players": [
+            "test"
+        ],
+        "public": true
+    }
+}
