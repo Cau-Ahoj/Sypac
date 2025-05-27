@@ -1,9 +1,10 @@
 <?php
 session_start();
 if (!isset($_SESSION['verified'])) {
-    die("Neoprávněný přístup.");
+    header("Location: forgot.php");
+    exit;
 }
-?>
+?>  
 
 <form action="save-password.php" method="post">
     <h2>Zadej nové heslo</h2>
