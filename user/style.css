@@ -1,0 +1,434 @@
+* {
+  box-sizing: border-box;
+  margin: 0;    
+  padding: 0;
+  font-family: sans-serif;
+}
+
+body {
+  background-color: #1e0041;
+  color: white;
+  padding: 20px;
+}
+
+.main-container {
+  display: grid;
+  gap: 20px;
+}
+
+.profile-section {
+  display: grid;
+  background-color: #440488;
+  border-radius: 20px;
+  padding: 20px;
+  gap: 20px;
+}
+
+.top-grid {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 20px;
+}
+
+.avatar {
+  background-color: #8f00ff;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 20px;
+}
+
+.info-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  background-color: transparent;
+  font-size: 18px;
+}
+
+.bottom-grid {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 20px;
+}
+
+.stats-box {
+  border-radius: 10px;
+  padding: 10px;
+  font-size: 18px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.level-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 10px;
+  background-color: transparent;
+}
+
+.level-text {
+  font-weight: bold;
+  font-size: 24px;
+  color: #ffdd00;
+  font-family: monospace;
+  margin-bottom: 10px;
+}
+
+.xp-bar-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.xp-bar {
+  flex-grow: 1;
+  height: 30px;
+  background-color: black;
+  border-radius: 50px;
+  margin-right: 10px;
+  overflow: hidden;
+}
+
+.xp-fill {
+  background-color: #ffd000;
+  width: 54%;
+  height: 100%;
+  border-radius: 50px 0 0 50px;
+}
+
+.xp-text {
+  font-size: 14px;
+}
+
+.character-grid {
+  background-color: #8f00ff;
+  border-radius: 20px;
+  padding: 30px;
+  text-align: center;
+  font-size: 18px;
+}
+
+.character-grid {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+.character-container {
+  display: flex;
+  gap: 40px;
+  width: 100%;
+  max-width: 600px; /* stejné jako profil */
+}
+
+.equipment {
+  display: grid;
+  grid-template-rows: repeat(4, 60px);
+  gap: 10px;
+}
+
+.inventory {
+  display: grid;
+  grid-template-columns: repeat(4, 60px);
+  grid-template-rows: repeat(4, 60px);
+  gap: 10px;
+}
+
+.item-slot {
+  width: 60px;
+  height: 60px;
+  background-color: #1e1e1e;
+  border: 2px solid #333;
+  border-radius: 8px;
+  box-sizing: border-box;
+}
+
+
+
+/*pro mobil css*/
+
+
+/* Malé telefony – SE, starší Androidy */
+@media (max-width: 375px) {
+  .top-grid {
+    grid-template-columns: 100px auto;
+    gap: 8px;
+  }
+
+  .avatar {
+    max-width: 100px;
+    height: 100px;
+  }
+
+  .info-box {
+    font-size: 14px;
+  }
+
+  .stats-box, .level-box {
+    font-size: 14px;
+  }
+
+  .xp-bar {
+    height: 20px;
+  }
+
+  .level-text {
+    font-size: 16px;
+  }
+
+
+}
+
+/* Střední telefony – iPhone 14, Galaxy S */
+@media (min-width: 376px) and (max-width: 430px) {
+  .top-grid {
+    grid-template-columns: 110px auto;
+  }
+
+  .avatar {
+    max-width: 110px;
+    height: 110px;
+  }
+
+  .info-box {
+    font-size: 15px;
+  }
+
+  .stats-box, .level-box {
+    font-size: 15px;
+  }
+
+  .xp-bar {
+    height: 22px;
+  }
+
+  .level-text {
+    font-size: 17px;
+  }
+
+
+}
+
+/* Větší mobily – Pixel 7, Galaxy Note apod. */
+@media (min-width: 431px) and (max-width: 768px) {
+  .top-grid {
+    grid-template-columns: 120px auto;
+  }
+
+  .avatar {
+    max-width: 120px;
+    height: 120px;
+  }
+
+  .info-box {
+    font-size: 16px;
+  }
+
+  .stats-box, .level-box {
+    font-size: 16px;
+  }
+
+  .xp-bar {
+    height: 24px;
+  }
+
+  .level-text {
+    font-size: 18px;
+  }
+
+
+}
+
+
+/*iphone 12pro max*/
+
+@media (max-width: 768px) {
+  .profile-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  .top-grid {
+    grid-column: 1 / 3;
+    display: grid;
+    grid-template-columns: 120px auto;
+    gap: 10px;
+  }
+
+  .avatar {
+    width: 100%;
+    max-width: 120px;
+    height: 120px;
+    border-radius: 20px;
+    background-color: #8f00ff;
+  }
+
+  .info-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-size: 16px;
+    gap: 6px;
+  }
+
+  .bottom-grid {
+    grid-column: 1 / 3;
+    display: grid;
+    grid-template-columns: 120px auto;
+    gap: 10px;
+  }
+
+  .stats-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-size: 16px;
+    padding: 10px;
+  }
+
+  .level-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 0;
+  }
+
+  .level-text {
+    font-size: 18px;
+    font-weight: bold;
+    color: #ffd000;
+  }
+
+  .xp-bar-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .xp-bar {
+    flex-grow: 1;
+    height: 24px;
+    background-color: black;
+    border-radius: 50px;
+    overflow: hidden;
+  }
+
+  .xp-fill {
+    background-color: #ffd000;
+    height: 100%;
+    border-radius: 50px 0 0 50px;
+  }
+
+  .xp-text {
+    font-size: 14px;
+  }
+
+
+}
+
+
+/* ios podpora*/
+
+@media (max-width: 768px) {
+  .profile-section {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    gap: 20px;
+  }
+
+  .top-grid {
+    display: grid;
+    grid-template-columns: 120px auto;
+    gap: 10px;
+    align-items: center;
+  }
+
+  .avatar {
+    width: 100%;
+    max-width: 120px;
+    height: 120px;
+    background-color: #8f00ff;
+    border-radius: 20px;
+    -webkit-border-radius: 20px;
+  }
+
+  .info-box {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    justify-content: center;
+    gap: 6px;
+    font-size: 16px;
+  }
+
+  .bottom-grid {
+    display: grid;
+    grid-template-columns: 120px auto;
+    gap: 10px;
+  }
+
+  .stats-box {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    justify-content: center;
+    padding: 10px;
+    font-size: 16px;
+  }
+
+  .level-box {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 0;
+  }
+
+  .xp-bar-container {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .xp-bar {
+    flex-grow: 1;
+    height: 24px;
+    background-color: black;
+    border-radius: 50px;
+    -webkit-border-radius: 50px;
+    overflow: hidden;
+  }
+
+  .xp-fill {
+    background-color: #ffd000;
+    height: 100%;
+    border-radius: 50px 0 0 50px;
+    -webkit-border-radius: 50px 0 0 50px;
+  }
+
+  .xp-text {
+    font-size: 14px;
+  }
+
+}
+

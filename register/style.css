@@ -1,0 +1,77 @@
+.register_page-body {
+  background-color: #1e0041;
+  margin: 0;
+  padding: 0;
+}
+
+.register_page-container {
+  display: flex;
+  height: 100vh;
+}
+
+.register_page-main {
+  flex: 1;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.register_page-form {
+  background-color: #6900ca;
+  box-shadow: 0 0 25px #ffda6e;
+  padding: 40px;
+  margin: 40px;
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  border-radius: 15px;
+  outline: 3px solid #ffda6e;
+}
+
+.register_page-pole {
+  display: flex;
+  flex-direction: column;
+}
+
+.register_page-label {
+  font-family: Open-Sans-ExtraBold;
+  font-weight: 800;
+  font-size: 1.5em;
+  color: white;
+}
+
+.register_page-input {
+  padding: 12px 12px 12px 40px;
+  border-radius: 10px;
+  border: none;
+  background-color: #5603aa;
+  color: white;
+  font-size: 1em;
+}
+
+.register_page-button {
+  font-family: Open-Sans-ExtraBold;
+  font-weight: 800;
+  background-color: #320065;
+  color: #ffde59;
+  border: none;
+  padding: 15px;
+  border-radius: 10px;
+  font-size: 2em;
+  cursor: pointer;
+}
+
+.register_page-note {
+  font-size: 0.9em;
+  color: #f0e0ff;
+  text-align: center;
+}
+
+.register_page-link {
+  color: white;
+  text-decoration: underline;
+}

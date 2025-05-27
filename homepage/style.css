@@ -1,0 +1,71 @@
+.page-welcome_box {
+  font-family: Open-Sans-ExtraBold;
+  text-align: center;
+  font-weight: 800;
+  margin-bottom: 30px;
+  font-size: 2em;
+  color: #ffda6e;
+}
+
+.page {
+  font-family: Open-Sans-Regular;
+  text-align: center;
+  font-weight: 100;
+  margin-bottom: 30px;
+  font-size: 1.35em;
+  color: #ffffff;
+}
+
+.welcome_box h2 {
+  font-size: 1.8rem;
+  color: #ffda6e;
+}
+
+.welcome_box p {
+  margin-top: 10px;
+  font-size: 1.2rem;
+  color: #ffffff;
+}
+
+.bonus_box {
+  position: absolute;
+  right: 40px;
+  top: 20px;
+}
+
+.game_box {
+  font-family: Open-Sans-Regular;
+  background-color: #5600a2;
+  border-radius: 15px;
+  text-align: center;
+  font-size: 1.3rem;
+  font-weight: bold;
+  padding-top: 150px;
+  padding-bottom: 150px;
+  color: white;
+  border: 5px solid #390063;
+  box-shadow: 0 0 10px #000;
+}
+
+.page-main {
+  margin-top: 60px;
+  padding: 20px;
+  flex: 1;
+  min-height: calc(100vh - 60px - 100px);
+}
+
+.page-news {
+  padding-top: 210px;
+  padding-bottom: 210px;
+  background-color: #6400b5;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  color: white;
+  position: relative;
+}
+
+.page-games {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}

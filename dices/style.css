@@ -1,0 +1,131 @@
+.dice_page-main {
+  margin-top: 120px;
+  padding: 20px;
+  flex: 1;
+  min-height: calc(100vh - 60px - 100px);
+}
+
+.dice_page-title {
+  font-family: "Open-Sans-ExtraBold";
+  text-align: center;
+  font-weight: 800;
+  margin-bottom: 30px;
+  font-size: 2em;
+  color: #ffda6e;
+}
+
+.dice_page-game{
+  font-family: Open-Sans-Regular;
+  background-color: #005702;
+  height: 90%;
+  border-radius: 15px;
+  text-align: center;
+  font-size: 1.3rem;
+  font-weight: bold;
+  padding-top: 50px;
+  padding-bottom: 50px;
+  color: white;
+  border: 5px solid #ddc05c;
+  box-shadow: 
+    0 0 6px #E8AC41,
+    0 0 6px #da3300;
+  display: flex;
+  align-content: space-between;
+  flex-direction: column;
+  
+  
+}
+
+.dice_page-game-variables{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.dice_page-game-variables *{
+    padding-top: 40px;
+    padding-bottom: 40px;
+    font-family: Bungee;
+    text-align: center;
+    font-size: 1.5em;
+    color: #ffda6e;
+    text-shadow:
+    0 0 6px #E8AC41;
+}
+
+.dice_page-game-dice{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    padding-bottom: 80px;
+}
+
+.dice_page-game-buttons{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    padding-top: 40px;
+    padding-bottom: 20px;
+}
+
+.dice_page-game-help{
+    display: flex;
+    justify-content:flex-end;
+    align-items:center;
+    padding-top: 20px;
+    padding-bottom: 10px;
+    padding-right: 30px;
+    color: #ffda6e;
+    text-shadow:
+    0 0 6px #E8AC41;
+    font-size: 1.5em;
+}
+.dice_page-game-help p{
+    cursor: pointer;
+    margin: 0;
+}
+
+.dice_page-game-buttons button {
+  margin: 10px 0;
+  padding-left: 90px;
+  padding-right: 90px;
+  padding-top: 25px;
+  padding-bottom: 25px;
+  background-color: #7600dc;
+  color: #ddc05c;
+  border: 2px solid #ffff00;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 1rem;
+  text-transform: uppercase;
+  box-shadow: 0 0 5px #ffff00;
+  transition: background-color 0.3s, transform 0.2s;
+  font-family: Bungee;
+  text-align: center;
+  font-size: 1.5em;
+  color: #ffda6e;
+}
+.dice_page-dice {
+    width: 60px;
+    height: 60px;
+    font-size: 24px;
+    margin: 5px;
+    border-radius: 8px;
+    cursor: pointer;
+    background-color: lightgreen; color: black; 
+}
+        
+
+.dice_page-popup-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000000;
+    z-index: 10000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 50%;
+}
