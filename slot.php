@@ -1,67 +1,73 @@
 <?php
-session_start();
-require_once 'database.php';
-$db = new DB();
-
-$spinCost = 50;
-$_SESSION['user_id'] = 1;
-
-if (!isset($_SESSION['user_id'])) {
-    die("Nepřihlášený uživatel.");
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    header("Location: ./");
+    exit;
 }
 
-$user_id = $_SESSION['user_id'];
-$user = $db->getOne("SELECT * FROM users WHERE id = ?", [$user_id]);
+require_once 'database.php';
+session_start();
+$db = new DB();
 
+$baseCost = 10;
+$maxCost = 10000;
+
+
+$user_id = $_SESSION['user_id'] ?? null;
+if (!$user_id) {
+    header("Location: ../login/");
+    exit;
+}
+
+$user = $db->getOne("SELECT * FROM users WHERE id = ?", [$user_id]);
 if (!$user) {
     die("Uživatel neexistuje.");
 }
 
 $currentMoney = $user['money'];
+$spinCost = $_SESSION['spinCost'] ?? 50;
+$result = '';
+$slots = [];
+$winAmount = 0;
 
-// Ošetření POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $userInput = (int)($_POST['spinCost'] ?? 0);
 
-    if ($currentMoney < $spinCost) {
-        $_SESSION['slot_message'] = [
-            'error' => true,
-            'text' => "Nemáš dostatek kreditu!"
-        ];
+    if ($userInput < $baseCost) {
+        $result = "Minimální částka na zatočení je $baseCost Kč.";
+    } elseif ($userInput > $maxCost) {
+        $result = "Maximální částka na zatočení je $maxCost Kč.";
+    } elseif ($currentMoney < $userInput) {
+        $result = "❌ Nemáš dostatek kreditu! ❌";
     } else {
+        $spinCost = $userInput;
+        $_SESSION['spinCost'] = $spinCost;
         $currentMoney -= $spinCost;
+        $multiplier = $spinCost / $baseCost;
 
-        $symbols = [
-            '🍒', '🍒', '🍒', '🍒',
-            '🍋', '🍋', '🍋', '🍋',
-            '🍇', '🍇', '🍇',
-            '🍀', '🍀', '🍀',
-            '💎', '💎',
-            '7️⃣', '7️⃣',
-            '🃏',
-        ];
+        // Symboly rozloženy dle výskytu (víc levných, míň drahých)
+        $symbols = array_merge(
+            array_fill(0, 10, '🍒'),
+            array_fill(0, 8, '🍋'),
+            array_fill(0, 6, '🍇'),
+            array_fill(0, 4, '🍀'),
+            array_fill(0, 3, '💎'),
+            array_fill(0, 2, '7️⃣'),
+            array_fill(0, 1, '🃏') // Joker = nejvzácnější
+        );
 
+        // Výběr náhodných slotů
         $slot1 = $symbols[array_rand($symbols)];
         $slot2 = $symbols[array_rand($symbols)];
         $slot3 = $symbols[array_rand($symbols)];
         $slots = [$slot1, $slot2, $slot3];
 
-        function count_symbols($slots) {
-            $counts = [];
-            foreach ($slots as $s) {
-                if (!isset($counts[$s])) $counts[$s] = 0;
-                $counts[$s]++;
-            }
-            return $counts;
-        }
-
-        $counts = count_symbols($slots);
+        // Výpočet výher
+        $counts = array_count_values($slots);
         $jokerCount = $counts['🃏'] ?? 0;
-        $winAmount = 0;
-        $result = "";
 
         if ($jokerCount === 3) {
-            $result = "🃏🃏 Tři jesteri 🃏🃏! Mega výhra!";
-            $winAmount = 1500;
+            $result = "🃏🃏 Tři jesteri! Mega výhra! 🃏";
+            $winAmount = round($spinCost * 100);
         } elseif ($jokerCount > 0) {
             unset($counts['🃏']);
             arsort($counts);
@@ -72,89 +78,71 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 switch ($mainSymbol) {
                     case '7️⃣':
                         $result = "JACKPOOT 💰 s jokerem!";
-                        $winAmount = 800;
+                        $winAmount = round($spinCost * 10);
                         break;
                     case '💎':
-                        $result = "💎💎 Diamantyyy s jokerem 💎💎!";
-                        $winAmount = 600;
+                        $result = "💎 Diamanty s jokerem 💎!";
+                        $winAmount = round($spinCost * 6);
                         break;
                     default:
-                        $result = "Výhra díky jokerovi🃏!";
-                        $winAmount = 500;
+                        $result = "Výhra díky jokerovi!";
+                        $winAmount = round($spinCost * 3);
                 }
+            } else {
+                $result = "Dva různé symboly a joker, žádná výhra.";
             }
         } elseif ($slot1 === $slot2 && $slot2 === $slot3) {
             switch ($slot1) {
                 case '7️⃣':
                     $result = "JACKPOOT 💰! Tři sedmičky!";
-                    $winAmount = 1200;
+                    $winAmount = round($spinCost * 20);
                     break;
                 case '💎':
-                    $result = "💎💎 Diamantyyy 💎💎!";
-                    $winAmount = 700;
+                    $result = "💎💎 Diamanty 💎💎!";
+                    $winAmount = round($spinCost * 10);
+                    break;
+                case '🍀':
+                    $result = "🍀🍀 Tři čtyřlístky 🍀🍀!";
+                    $winAmount = round($spinCost * 6);
+                    break;
+                case '🍇':
+                    $result = "🍇🍇 Tři hrozny! 🍇🍇";
+                    $winAmount = round($spinCost * 4);
+                    break;
+                case '🍋':
+                    $result = "🍋🍋 Tři citrony! 🍋🍋";
+                    $winAmount = round($spinCost * 3);
+                    break;
+                case '🍒':
+                    $result = "🍒🍒 Tři třešně! 🍒🍒";
+                    $winAmount = round($spinCost * 2);
                     break;
                 default:
-                    $result = "Našel jsi tři stejné symboly!";
-                    $winAmount = 400;
+                    $result = "Výhra!";
+                    $winAmount = round($spinCost * 2);
             }
-        } elseif ($slot1 === $slot2 || $slot2 === $slot3 || $slot1 === $slot3) {
-            $result = "Bohužel prohrál si!";
         } else {
-            $result = "Nic si nevyhrál.";
+            $result = "❌ Nic si nevyhrál.";
+            $winAmount = 0;
         }
 
+        // Přičtení výhry
         $currentMoney += $winAmount;
 
-        // Uložení výsledku
+        // Uložení do DB
+        $db->run("UPDATE users SET money = ? WHERE id = ?", [$currentMoney, $user_id]);
         $db->run(
             "INSERT INTO slot_results (user_id, slot1, slot2, slot3, result_text, win_amount, spin_cost, credit_after)
              VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
-            [
-                $user_id,
-                $slot1,
-                $slot2,
-                $slot3,
-                $result,
-                $winAmount,
-                $spinCost,
-                $currentMoney
-            ]
+            [$user_id, $slot1, $slot2, $slot3, $result, $winAmount, $spinCost, $currentMoney]
         );
-
-        // Aktualizace kreditu
-        $db->run("UPDATE users SET money = ? WHERE id = ?", [$currentMoney, $user_id]);
-
-        // Uložení pro GET
-        $_SESSION['slot_result'] = [
-            'slots' => $slots,
-            'result' => $result,
-            'money' => $currentMoney
-        ];
     }
 
-    // Přesměrování (POST-Redirect-GET)
-    header("Location: " . $_SERVER['PHP_SELF']);
+    // POST-Redirect-GET
+    $_SESSION['result'] = $result;
+    $_SESSION['slots'] = $slots;
+    $_SESSION['currentMoney'] = $currentMoney;
+
+    header("Location: ./");
     exit;
 }
-
-echo "<h2>🎰 Vítej ve hře automaty 🎰</h2>";
-
-if (isset($_SESSION['slot_result'])) {
-    $r = $_SESSION['slot_result'];
-    echo "<h1>{$r['slots'][0]} | {$r['slots'][1]} | {$r['slots'][2]}</h1>";
-    echo "<p>{$r['result']}</p>";
-    echo "<p><strong>Aktuální kredit:</strong> {$r['money']}</p>";
-    unset($_SESSION['slot_result']);
-} else {
-    echo "<p><strong>Aktuální kredit:</strong> {$currentMoney}</p>";
-}
-
-if (isset($_SESSION['slot_message'])) {
-    $msg = $_SESSION['slot_message'];
-    echo "<p style='color:" . ($msg['error'] ? "red" : "green") . ";'>{$msg['text']}</p>";
-    unset($_SESSION['slot_message']);
-}
-
-
-echo '<form method="post"><button type="submit">Zatočit</button></form>';
-?>

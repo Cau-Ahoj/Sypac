@@ -5,9 +5,9 @@ class DB {
     // DATABASE CONNECTION
     public function __construct() {
         $host = 'localhost';
-        $dbname = 'hokr_casino_db';
-        $user = 'hokr';
-        $pass = 'kWg2kS99mAGXLUGX';
+        $dbname = 'sypac';
+        $user = 'sypac';
+        $pass = '8QGSkbDMqhqUpSPJ';
 
         try {
             $this->pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $user, $pass);
@@ -24,7 +24,7 @@ class DB {
     }
 
     // SELECT
-    public function get($sql, $values = []) {
+    public function getAll($sql, $values = []) {
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute($values);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
