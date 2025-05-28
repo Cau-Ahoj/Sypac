@@ -1,0 +1,229 @@
+@font-face {
+  font-family: Bungee;
+  src: url("../fonty/Bungee-Regular.ttf");
+}
+
+@font-face {
+  font-family: Open-Sans-ExtraBold;
+  src: url("../fonty/OpenSans-ExtraBold.ttf");
+}
+
+@font-face {
+  font-family: Open-Sans-Regular;
+  src: url("../fonty/OpenSans-Regular.ttf");
+}
+
+h1 {
+  font-family: Bungee;
+  margin-bottom: 10px;
+  font-size: 2em;
+  color: #ffda6e;
+  text-shadow:
+    0 0 6px #E8AC41,
+    0 0 6px #da3300;
+  width: 100%;
+}
+
+.register_page-body {
+  background-color: #1e0041;
+  margin: 0;
+  padding: 0;
+}
+
+.register_page-main {
+  flex: 1;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.register_page-form {
+  background-color: #6900ca;
+  box-shadow: 0 0 25px #ffda6e;
+  padding: 2rem 3rem;
+  width: 80vw;
+  max-width: 1400px;
+  margin: 2rem auto;
+  margin-top: 0rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  border-radius: 25px;
+  outline: 3px solid #ffda6e;
+  box-sizing: border-box;
+}
+
+.register_page-pole {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 400px;
+  max-width: 100%;
+  margin: 0 auto;
+  gap: 5px; 
+}
+
+.register_page-label {
+  font-family: Open-Sans-ExtraBold;
+  font-weight: 800;
+  font-size: 1.5em;
+  padding-left: 15px;
+  color: white;
+}
+
+.register_page-input {
+  padding: 15px 20px;
+  border-radius: 10px;
+  border: none;
+  background-color: #5603aa;
+  color: white;
+  font-size: 1em;
+  outline: 3px solid #ffda6e;
+  box-shadow: 0 0 15px #ffda6e;
+  max-width: 400px;
+  width: 100%;
+}
+
+.register_page-button {
+  font-family: Bungee;
+  background-color: #320065;
+  color: #ffde59;
+  border: none;
+  padding: 5px 25px 5px 25px;
+  border-radius: 10px;
+  font-size: 1.5em;
+  cursor: pointer;
+}
+
+.register_page-note {
+  font-family: Open-Sans-Regular;
+  color: white;
+  text-align: center;
+}
+
+.register_page-link {
+  font-family: Open-Sans-Regular;
+  color: white;
+  text-decoration: underline;
+}
+
+/*mobil*/
+@media (max-width: 360px) {
+  .register_page-main {
+    align-items: flex-start;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  .register_page-form {
+    padding: 15px 20px;
+    max-width: 100%;
+    width: 100%;
+    margin: 0;
+  }
+
+  .register_page-label {
+    font-size: 1.2em;
+  }
+
+  .register_page-input {
+    padding: 10px 20px;
+    font-size: 0.9em;
+  }
+
+  .register_page-button {
+    font-size: 1.5em;
+    padding: 10px;
+  }
+
+  h1 {
+    font-size: 1.8em;
+    text-align: left;
+  }
+
+  .register_page-note {
+    font-size: 0.8em;
+  }
+}
+
+@media (min-width: 361px) and (max-width: 420px) {
+  .register_page-main {
+    align-items: flex-start;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  .register_page-form {
+    padding: 20px 30px;
+    max-width: 95%;
+    width: 100%;
+    margin: 0;
+  }
+
+  .register_page-label {
+    font-size: 1.4em;
+  }
+
+  .register_page-input {
+    padding: 12px 30px;
+    font-size: 1em;
+  }
+
+  .register_page-button {
+    font-size: 1.8em;
+    padding: 12px;
+  }
+
+  h1 {
+    font-size: 2em;
+    text-align: left;
+  }
+
+  .register_page-note {
+    font-size: 0.85em;
+  }
+}
+
+@media (min-width: 421px) and (max-width: 720px) {
+  .register_page-main {
+    align-items: flex-start;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  .register_page-form {
+    padding: 25px 40px;
+    max-width: 90%;
+    width: 100%;
+    margin: 0;
+  }
+
+  .register_page-label {
+    font-size: 1.5em;
+  }
+
+  .register_page-input {
+    padding: 14px 35px;
+    font-size: 1em;
+  }
+
+  .register_page-button {
+    font-size: 2em;
+    padding: 15px;
+  }
+
+  h1 {
+    font-size: 2.2em;
+    text-align: left;
+  }
+
+  .register_page-note {
+    font-size: 0.9em;
+  }
+}

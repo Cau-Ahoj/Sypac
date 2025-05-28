@@ -1,0 +1,293 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+body {
+  background-color: #1e0041;
+  color: white;
+  padding: 20px;
+}
+
+/* HLAVNÍ KONTEJNER */
+.main-container {
+  display: grid;
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* SEKCE PROFILU */
+.profile-section {
+  display: grid;
+  background-color: #440488;
+  border-radius: 20px;
+  padding: 20px;
+  gap: 20px;
+  width: 100%;
+}
+
+.top-grid {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 20px;
+}
+
+.avatar {
+  background-color: #8f00ff;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 20px;
+}
+
+.info-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  font-size: 18px;
+}
+
+.bottom-grid {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 20px;
+}
+
+.stats-box {
+  border-radius: 10px;
+  padding: 10px;
+  font-size: 18px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.level-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 10px;
+}
+
+.level-text {
+  font-weight: bold;
+  font-size: 24px;
+  color: #ffdd00;
+  font-family: monospace;
+  margin-bottom: 10px;
+}
+
+.xp-bar-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+}
+
+.xp-text {
+  font-size: 14px;
+  font-weight: bold;
+  color: white;
+  text-align: right;
+}
+
+.xp-bar {
+  width: 100%;
+  height: 30px;
+  background-color: black;
+  border-radius: 50px;
+  overflow: hidden;
+}
+
+.xp-fill {
+  background-color: #ffd000;
+  height: 100%;
+  border-radius: 50px 0 0 50px;
+}
+
+/* SEKCE POSTAVY A ITEMU */
+.character-section {
+  display: flex;
+  gap: 40px;
+  background-color: #440488;
+  border-radius: 20px;
+  padding: 30px;
+  margin-top: 30px;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  min-height: 360px;
+  width: 100%;
+}
+
+.character-box {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  flex: 1;
+  max-width: 500px;
+}
+
+.character-display {
+  width: 100%;
+  max-width: 400px;
+  height: 400px;
+  background-color: #8f00ff;
+  border: 6px solid gold;
+  border-radius: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 25px gold;
+}
+
+.character-body {
+  width: 100px;
+  height: 100px;
+  background-color: #333;
+  border-radius: 50%;
+  position: relative;
+}
+
+.character-body::after {
+  content: "";
+  position: absolute;
+  bottom: -55px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 140px;
+  height: 80px;
+  background-color: #333;
+  border-radius: 50% / 30%;
+}
+
+.arrow {
+  font-size: 3rem;
+  color: gold;
+  cursor: pointer;
+  user-select: none;
+  transition: transform 0.2s ease;
+}
+
+.arrow:hover {
+  transform: scale(1.2);
+}
+
+.equipped-item {
+  flex: 1;
+  max-width: 500px;
+  height: 400px;
+  background-color: #8f00ff;
+  border-radius: 30px;
+  padding: 20px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.item-title {
+  font-size: 22px;
+  margin-bottom: 16px;
+  font-family: monospace;
+  color: #ffd000;
+}
+
+.item-desc {
+  font-size: 16px;
+  line-height: 1.5;
+  color: white;
+}
+
+/* MOBILNÍ VERZE */
+@media (max-width: 768px) {
+  html, body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .main-container {
+    padding: 10px;
+  }
+
+  .profile-section {
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+  }
+
+  .top-grid {
+    grid-template-columns: 120px 1fr;
+    gap: 16px;
+    align-items: center;
+  }
+
+  .avatar {
+    max-width: 120px;
+  }
+
+  .info-box,
+  .stats-box,
+  .level-box {
+    font-size: 14px;
+    gap: 6px;
+  }
+
+  .level-box {
+    gap: 8px;
+    padding: 10px 0;
+  }
+
+  .level-text {
+    font-size: 16px;
+  }
+
+  .xp-bar {
+    height: 20px;
+  }
+
+  .xp-text {
+    font-size: 13px;
+  }
+
+  .character-section {
+    flex-direction: column;
+    gap: 20px;
+    padding: 16px;
+  }
+
+  .character-box,
+  .equipped-item {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .character-display,
+  .equipped-item {
+    width: 250px;
+    height: 250px;
+  }
+
+  .character-body {
+    width: 80px;
+    height: 80px;
+  }
+
+  .character-body::after {
+    width: 100px;
+    height: 60px;
+    bottom: -45px;
+  }
+
+  .arrow {
+    font-size: 2.5rem;
+  }
+}

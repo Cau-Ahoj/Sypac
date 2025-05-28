@@ -1,0 +1,318 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Open-Sans-Regular;
+    background-color: #6900ca;
+    width: 100%;
+    min-height: 100vh;
+}
+.layout-container{
+    display: grid;
+    grid-template-areas:
+        "header header"
+        "aside main"
+        "footer footer";
+        grid-template-columns: 200px 1fr; /* Aside široký 200px, main zbytek */
+        grid-template-rows: auto 1fr auto; /* Header a footer automaticky, main zabere zbytek */
+        min-height: 100vh;
+}
+header{
+grid-area: header;
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  background-color: transparent;
+  gap: 20px;
+ }
+.container {
+    display: flex;
+    height: 100vh;
+}
+.logo {
+    padding-top: 10px;
+  }
+  
+  .logo h1 {
+    font-family: Bungee;
+    font-size: 2em;
+    color: #ffda6e;
+    text-shadow: 0 0 6px #E8AC41, 0 0 6px #da3300;
+    margin-left: 20%;
+    text-align: center;
+    background: #7600DC;
+  }
+  header .search {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+  }
+  
+  header .search_bar input {
+    width: 83%;
+    padding: 10px;
+    font-size: 1em;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    box-shadow: 0 0 6px #00000066;
+  }
+  header .header_buttons {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .header_buttons_box {
+    display: flex;
+    justify-content: center;
+    gap: 100px;
+  }
+  
+  .header_buttons_box button {
+    width: 35px;
+    height: 35px;
+    background-color: #5a02a4;
+    border: 3px solid #ffda6e;
+    border-radius: 50%;
+    box-shadow: 0 0 6px #00000066;
+    transition: background-color 0.3s ease;
+  }
+  
+  .header_buttons_box button:hover {
+    background-color: #7b04d6;
+    cursor: pointer;
+  }
+  
+  aside {
+    grid-area: aside;
+    display: flex;
+    flex-direction: column;
+    padding: 20px 10px;
+    
+  }
+  
+  nav {
+    display: flex;
+    flex-direction: column;
+    font-size: 20px;
+  }
+  
+  nav li {
+    list-style: none;
+  }
+  
+  nav li button {
+    font-family: Bungee;
+    background-color:  #5603AA;
+    color: #ffda6e;
+    border: none;
+    margin: 8px 0;
+    padding: 10px;
+    font-size: 1em;
+    border-radius: 10px;
+    box-shadow: 0 0 6px #00000066;
+    transition: background-color 0.2s ease;
+  }
+  
+  nav li button:hover {
+    background-color:  #5603AA;
+    cursor: pointer;
+  }
+  
+  main {
+    grid-area: main;
+  }
+  
+  footer {
+    grid-area: footer;
+    color: black;
+    text-align: center;
+    padding: 20px;
+    font-family: Open-Sans-Regular;
+    font-size: 1em;
+    color: white;
+  }
+  
+  .active_time {
+    font-family: Bungee;
+    font-size: 1.3em;
+    color: #ffda6e;
+    margin-top: auto;
+    padding: 20px;
+    background-color: #5603AA;;
+    border-top: 4px solid #ffda6e;
+    box-shadow: inset 0 0 10px #000;
+    padding-right: 100%;
+  }
+  
+  .navigation{
+    margin-top: 80px;
+  }
+  
+  .navigation button{
+    padding-left: 40%;
+    padding-right: 40%;
+  }
+  
+  button#profile{
+    margin-right: 54%;
+  }
+  
+  button{
+    padding: 25px 25px;
+  }
+  
+
+.sidebar {
+    background-color: #5b249f;
+    width: 200px;
+    padding: 20px;
+}
+
+.sidebar h1 {
+    font-size: 1.5em;
+    text-align: center;
+}
+
+.sidebar nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar nav ul li {
+    margin: 20px 0;
+}
+
+.sidebar nav ul li a {
+    color: #ffd700;
+    text-decoration: none;
+}
+
+.main-content {
+    flex: 1;
+    padding: 20px;
+    background-color: #12002e;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+header h2 {
+    font-size: 2em;
+}
+
+.credits {
+    display: flex;
+    justify-content: space-around;
+    width: 300px;
+}
+
+.slots {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+/* H1 Slots nad sloty */
+.slots-title {
+  font-family: Bungee;
+    font-size: 2em;
+    color: #ffda6e;
+    text-shadow: 0 0 6px #E8AC41, 0 0 6px #da3300;
+    margin-left: 20%;
+    text-align: center;
+    background: #7600DC;
+}
+
+/* Zaoblený čtverec na pozadí slotů */
+.slots-background {
+  background-color: #12002e; /* Tmavý fialový podklad */
+  border-radius: 30px; /* Zaoblení rohů */
+  padding: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: fit-content;
+  margin: 0 auto 40px auto; /* Zarovnání na střed */
+  box-shadow: 0 0 15px rgba(0,0,0,0.5); /* Jemný stín */
+}
+
+/* Sloty uvnitř pozadí */
+.slot-reel {
+  width: 120px;
+  height: 160px;
+  background-color: #000;
+  border: 3px solid #ffd700;
+  margin: 0 15px;
+  font-size: 3em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 15px; /* Zaoblené rohy slotů */
+}
+.slots-mainPart{
+  font-family: Open-Sans-Regular;
+  background-image: url('assets/Pozadí.png');
+  height: fit-content;
+  border-radius: 105px;
+  text-align: center;
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: white;
+  border: 5px solid #ddc05c;
+  box-shadow: 0 0 6px #E8AC41, 0 0 6px #da3300;
+  display: flex;
+  align-content: space-between;
+  flex-direction: column
+}
+.slot-reel {
+    width: 100px;
+    height: 150px;
+    background-color: #000;
+    border: 3px solid #ffd700;
+    margin: 0 10px;
+    font-size: 3em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.slots-layout{
+    display: flex;
+    flex-direction: row;
+}
+.controls {
+    text-align: center;
+}
+
+.bet-control {
+    margin: 10px 0;
+}
+
+.bet-control input {
+    width: 80px;
+    text-align: center;
+}
+
+.result {
+    margin-top: 10px;
+    color: #fff;
+    font-size: 1.2em;
+}
+@font-face {
+    font-family: Bungee;
+    src: url("fonty/Bungee-Regular.ttf");
+  }
+  
+  @font-face {
+    font-family: Open-Sans-ExtraBold;
+    src: url("fonty/OpenSans-ExtraBold.ttf");
+  }
+  
+  @font-face {
+    font-family: Open-Sans-Regular;
+    src: url("fonty/OpenSans-Regular.ttf");
+  }
+  
