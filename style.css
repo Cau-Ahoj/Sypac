@@ -1,0 +1,368 @@
+/* Základní reset a stylování těla */
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #1A0F2A; /* Tmavě fialové pozadí */
+    color: #D9C8FF; /* Světle levandulová pro text */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Hlavička */
+.site-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 25px 40px;
+    flex-shrink: 0; /* Aby se hlavička nezmenšovala */
+}
+
+.header-bar {
+    height: 28px;
+    width: 55%;
+    background-color: #4A1F8C; /* Středně fialová pro prvky */
+    border-radius: 14px;
+}
+
+.header-dots {
+    display: flex;
+    gap: 20px;
+}
+
+.header-dots .dot {
+    width: 28px;
+    height: 28px;
+    background-color: #4A1F8C;
+    border-radius: 50%;
+}
+
+/* Obalovač stránky pro hlavní layout (sidebar + obsah) */
+.page-wrapper {
+    display: flex;
+    flex-grow: 1;
+    padding: 0 40px 40px;
+    gap: 30px;
+    overflow: hidden; /* Zabrání nechtěnému scrollu na body, pokud obsah přeteče */
+}
+
+/* Panel s vybavením (levý sidebar) */
+.equipment-panel {
+    padding-top: 15px; /* Lehké odsazení shora */
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    flex-shrink: 0; /* Aby se panel nezmenšoval */
+}
+
+.equipment-slot {
+    width: 130px;
+    height: 75px;
+    background-color: #4A1F8C;
+    border-radius: 12px;
+}
+
+.equipment-slot.large {
+    height: 160px;
+}
+
+/* Hlavní obsahová oblast */
+.main-content-area {
+    flex-grow: 1;
+    background-color: #27194C; /* Tmavší fialová, ale světlejší než body */
+    border-radius: 20px;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto; /* Povolí scroll, pokud je obsahu více */
+}
+
+.content-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    flex-wrap: wrap; /* Pro menší obrazovky */
+    gap: 15px;
+}
+
+.content-header h1 {
+    margin: 0;
+    font-size: 28px;
+    color: #D9C8FF;
+}
+
+.styled-button-link {
+    text-decoration: none;
+}
+
+.styled-button {
+    background-color: #4A1F8C;
+    color: #D9C8FF;
+    border: none;
+    border-radius: 25px;
+    padding: 12px 25px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+    transition: background-color 0.2s ease;
+}
+
+.styled-button:hover {
+    background-color: #5F29AA; /* Světlejší fialová pro hover */
+}
+
+/* Seznam položek */
+.items-list-display {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Mezery mezi kartami položek */
+}
+
+.item-card {
+    background-color: #4A1F8C; /* Stejná barva jako tlačítka a sloty */
+    border-radius: 16px;
+    padding: 20px;
+    line-height: 1.6;
+}
+
+.item-card-link {
+    text-decoration: none;
+    color: #D9C8FF; /* Barva textu uvnitř karty */
+    display: block; /* Aby odkaz zabral celou kartu */
+}
+
+.item-card-link strong {
+    font-size: 1.3em;
+    color: #FFF; /* Mírně výraznější název itemu */
+    margin-bottom: 8px;
+    display: inline-block;
+}
+
+.empty-list-message {
+    text-align: center;
+    padding: 20px;
+    font-style: italic;
+    color: #A08FBE; /* Mírně tlumenější barva pro zprávu */
+}
+
+#page-item-detail .main-content-area .content-header h1 {
+    color: #D9C8FF; /* Barva nadpisu jako na seznamu */
+    margin-bottom: 20px; /* Odsazení pod nadpisem */
+}
+
+#page-item-detail .item-detail-container {
+    display: flex;
+    gap: 30px; /* Mezera mezi sloupcem obrázku a informacemi */
+    background-color: #3A2A5F; /* Mírně odlišné pozadí pro kontejner detailu, pokud je třeba */
+    padding: 25px;
+    border-radius: 15px;
+    flex-wrap: wrap; /* Pro responzivitu na menších obrazovkách */
+}
+
+/* Levý sloupec s placeholderem pro obrázek */
+#page-item-detail .item-visual-column {
+    flex: 1 1 300px; /* Flex-grow, flex-shrink, flex-basis */
+    min-width: 250px; /* Minimální šířka pro placeholder */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#page-item-detail .item-image-placeholder {
+    width: 100%;
+    max-width: 400px; /* Maximální šířka placeholderu */
+    aspect-ratio: 4 / 3; /* Poměr stran pro placeholder, může být i 1/1 pro čtverec */
+    background-color: #4A1F8C; /* Stejná barva jako ostatní aktivní prvky */
+    border: 3px dashed #6F42C1; /* Přerušovaný rámeček pro odlišení */
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #D9C8FF;
+    font-size: 1.2em;
+    font-style: italic;
+}
+#page-item-detail .item-image-placeholder span {
+    opacity: 0.7;
+}
+
+
+/* Pravý sloupec s informacemi a akcemi */
+#page-item-detail .item-info-column {
+    flex: 2 1 400px; /* Více místa pro textové informace */
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Mezery mezi sekcemi informací */
+}
+
+#page-item-detail .item-name-heading {
+    font-size: 2.2em; /* Větší nadpis pro název položky */
+    color: #FFFFFF;
+    margin: 0 0 10px 0;
+    font-weight: 600;
+    border-bottom: 1px solid #4A1F8C;
+    padding-bottom: 10px;
+}
+
+#page-item-detail .item-attributes p {
+    margin: 8px 0;
+    line-height: 1.6;
+    color: #D9C8FF; /* Standardní barva textu */
+}
+
+#page-item-detail .item-attributes p strong {
+    color: #E0D4FF; /* Mírně světlejší pro labely */
+    min-width: 120px; /* Pro zarovnání popisů, pokud by bylo třeba */
+    display: inline-block;
+}
+#page-item-detail .item-description{
+    font-size: 1.1em;
+}
+
+#page-item-detail .item-actions {
+    margin-top: auto; /* Posune akce (tlačítka) dolů, pokud je místo */
+    padding-top: 20px; /* Odsazení od atributů */
+    border-top: 1px solid #4A1F8C;
+}
+
+#page-item-detail .ownership-status {
+    font-weight: bold;
+    margin-bottom: 15px;
+    font-size: 1.1em;
+    color: #D9C8FF;
+}
+
+#page-item-detail .action-form {
+    margin: 0;
+}
+
+#page-item-detail .styled-button {
+    /* Obecné styly pro tlačítka jsou již definovány */
+    /* Zde můžeme přidat specifika, pokud jsou potřeba */
+    padding: 12px 25px;
+    font-size: 1.1em;
+    width: 100%; /* Tlačítka přes celou šířku sloupce akcí */
+    box-sizing: border-box;
+}
+
+#page-item-detail .buy-button {
+    background-color: #5cb85c; /* Zelená pro nákup */
+    color: white;
+}
+#page-item-detail .buy-button:hover {
+    background-color: #4cae4c;
+}
+
+#page-item-detail .sell-button {
+    background-color: #d9534f; /* Červená pro prodej */
+    color: white;
+}
+#page-item-detail .sell-button:hover {
+    background-color: #c9302c;
+}
+
+
+/* Info a error zprávy specifické pro detail položky */
+#page-item-detail .info-message.general-info {
+    background-color: #4A1F8C; /* Podklad z fialového designu */
+    color: #D9C8FF;
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 25px;
+    text-align: center;
+    border: 1px solid #6F42C1;
+}
+
+#page-item-detail .error-message-standalone {
+    color: #ff6b6b; /* Výrazná barva pro chybu */
+    background-color: #4A1F8C;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 1.2em;
+    border: 1px solid #ff6b6b;
+}
+
+/* Debugovací info, pokud ho chceš skrýt */
+/*
+#page-item-detail .debug-info {
+    display: none;
+}
+*/
+#page-item-detail .debug-info {
+    font-size: 0.8em;
+    color: #776c8f;
+    margin-top: 20px;
+    text-align: right;
+}
+
+.critical-error-message { /* Pro případ, že by item_id nebylo vůbec předáno */
+    background-color: #1A0F2A;
+    color: #ff6b6b;
+    padding: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-align: center;
+    font-size: 1.5em;
+}
+#page-purchased-items .main-content-area .content-header h1 {
+    color: #D9C8FF;
+    margin-bottom: 25px;
+}
+
+#page-purchased-items .purchased-items-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Mezery mezi kartami položek */
+}
+
+#page-purchased-items .purchased-item-card {
+    background-color: #4A1F8C; /* Stejná barva jako .item-card */
+    border-radius: 16px;
+    padding: 20px;
+    line-height: 1.6;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+#page-purchased-items .purchased-item-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+}
+
+
+#page-purchased-items .item-card-link { /* Používáme stejnou třídu jako na hlavní stránce pro konzistenci */
+    text-decoration: none;
+    color: #D9C8FF;
+    display: block;
+}
+
+#page-purchased-items .item-card-link strong {
+    font-size: 1.3em;
+    color: #FFF;
+    margin-bottom: 8px;
+    display: inline-block;
+}
+
+/* Zpráva, pokud nejsou žádné zakoupené položky - používá stejnou třídu jako na seznamu všech položek */
+#page-purchased-items .empty-list-message {
+    text-align: center;
+    padding: 30px 20px;
+    font-style: italic;
+    color: #A08FBE;
+    background-color: #3A2A5F; /* Mírně odlišné pozadí pro zprávu */
+    border-radius: 12px;
+    font-size: 1.1em;
+}
+
+#page-purchased-items .navigation-buttons {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #4A1F8C;
+    display: flex;
+    justify-content: flex-start; /* Nebo center/flex-end podle potřeby */
+}
