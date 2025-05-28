@@ -1,130 +1,155 @@
-// Soubor: script.js
-
-let rewards = [];
 let gameReady = false;
 let shellSelected = false;
+let currentBet = 0;
+let userBalance = 0;
+let lastWinAmount = 0;
+let inDoubleRound = false;
 
-// Funkce fetchUserStats() byla odebrána, protože uživatel ji nechce.
-// Nebudou se tedy zobrazovat ani aktualizovat uživatelské statistiky.
-
+function updateBalance() {
+    fetch('get_balance.php')
+        .then(res => res.json())
+        .then(data => {
+            if (data.success) {
+                userBalance = data.balance;
+                document.getElementById('userBalance').innerText = `Zůstatek: ${userBalance} peněz`;
+            } else {
+                document.getElementById('userBalance').innerText = `Chyba: ${data.error}`;
+            }
+        })
+        .catch(err => {
+            document.getElementById('userBalance').innerText = `Chyba: ${err.message}`;
+        });
+}
 
 window.onload = () => {
-    // Načítání odměn ze serveru
-    // Cesta k get_rewards.php je správná
-    fetch('get_rewards.php')
-        .then(res => {
-            if (!res.ok) {
-                // Pokud HTTP odpověď není OK, pokusíme se přečíst text odpovědi pro detailnější chybu
-                return res.text().then(text => {
-                    throw new Error(`Síťová chyba: ${res.status} - ${text}`);
-                });
-            }
-            // Zkusíme parsovat odpověď jako JSON
-            return res.json();
-        })
-        .then(data => {
-            // Zkontrolujeme, zda JSON obsahuje chybovou zprávu z PHP
-            if (data.error) {
-                throw new Error(data.error);
-            }
-            // Zkontrolujeme, zda data jsou pole (očekávaný formát pro odměny)
-            if (!Array.isArray(data)) {
-                throw new Error('Neočekávaný formát dat odměn. Očekáváno pole.');
-            }
-            rewards = data; // Uložíme načtené odměny do globální proměnné
-            console.log('Načtené odměny:', rewards);
-            document.getElementById('startBtn').disabled = false; // Aktivujeme tlačítko "Začít hru"
-
-            // fetchUserStats(); // Toto volání je Nyní odebráno
-        })
-        .catch(error => {
-            // Zachytíme jakoukoli chybu během procesu fetch/parse
-            console.error('Chyba při načítání odměn:', error);
-            document.getElementById('reward').innerText = `Chyba: ${error.message || 'Neznámá chyba při načítání odměn.'}`;
-            document.getElementById('startBtn').disabled = true; // Deaktivujeme tlačítko
-        });
+    updateBalance();
+    document.getElementById('startBtn').disabled = false;
 };
 
 document.getElementById('startBtn').onclick = () => {
-    // Zkontrolujeme, zda jsou odměny načteny a dostupné
-    if (rewards.length === 0) {
-        alert('Odměny nejsou dostupné. Zkuste to prosím později.');
+    const betInput = document.getElementById('betAmountInput');
+    const betAmount = parseInt(betInput.value, 10);
+
+    if (isNaN(betAmount) || betAmount <= 0) {
+        document.getElementById('reward').innerText = 'Zadejte platnou částku.';
+        betInput.focus();
         return;
     }
-    gameReady = true; // Hra je připravena k výběru
-    shellSelected = false; // Žádná skořápka zatím nebyla vybrána
-    document.getElementById('reward').innerText = ''; // Vyčistíme zprávu o odměně
-    // Aktivujeme všechna tlačítka skořápek
+
+    if (betAmount > userBalance) {
+        document.getElementById('reward').innerText = `Nemáte dostatek peněz (zůstatek: ${userBalance})`;
+        return;
+    }
+
+    currentBet = betAmount;
+    shellSelected = false;
+    gameReady = true;
+    lastWinAmount = 0;
+    inDoubleRound = false;
+
+    document.getElementById('reward').innerText = `Sázka: ${currentBet} peněz. Vyberte skořápku!`;
     document.querySelectorAll('.shell').forEach(btn => btn.disabled = false);
-    document.getElementById('startBtn').disabled = true; // Deaktivujeme tlačítko "Začít hru"
+    document.getElementById('startBtn').disabled = true;
+    betInput.disabled = true;
+
+    fetch('validate.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            bet_amount: currentBet,
+            is_win: false, // ještě nevíme
+            won_amount: 0,
+            game_type: 'normal'
+        })
+    }).then(res => res.json())
+      .then(data => {
+          if (data.success) updateBalance();
+          else console.error(data.error);
+      });    
 };
 
 function chooseShell(e) {
-    // Zastavíme funkci, pokud hra není připravena nebo už byla vybrána skořápka
     if (!gameReady || shellSelected) return;
 
-    shellSelected = true; // Označíme, že skořápka byla vybrána
-    gameReady = false; // Hra už není připravena k dalšímu výběru v tomto kole
+    shellSelected = true;
+    gameReady = false;
 
-    // Náhodně vybereme jednu odměnu z načtených odměn
-    const reward = rewards[Math.floor(Math.random() * rewards.length)];
+    const isWin = Math.random() < (inDoubleRound ? 0.1 : 1 / 10);
+    const wonAmount = inDoubleRound ? lastWinAmount : currentBet * 5;
 
-    if (!reward) {
-        console.error('Chyba při výběru výhry: Objekt odměny je null/undefined.');
-        document.getElementById('reward').innerText = 'Výhra nenalezena.';
-        document.getElementById('startBtn').disabled = false; // Umožnit restart hry
-        return;
+    let message = '';
+    let payload = {
+        bet_amount: inDoubleRound ? 0 : currentBet,
+        is_win: isWin,
+        won_amount: inDoubleRound ? (isWin ? lastWinAmount : -lastWinAmount) : wonAmount,
+        game_type: inDoubleRound ? 'double' : 'normal'
+    };
+
+    if (inDoubleRound) {
+        if (isWin) {
+            lastWinAmount *= 2;
+            message = `Double or Nothing vyšlo! Výhra je nyní ${lastWinAmount} peněz. Chceš to zkusit znovu?`;
+            document.getElementById('afterWinControls').style.display = 'block';
+            document.getElementById('startBtn').style.display = 'none';
+        } else {
+            message = `Bohužel, prohráváš svou výhru.`;
+            lastWinAmount = 0;
+            document.getElementById('afterWinControls').style.display = 'none';
+            document.getElementById('startBtn').style.display = 'inline-block';
+        }
+
+        inDoubleRound = false;
+
+    } else {
+        if (isWin) {
+            lastWinAmount = wonAmount;
+            message = `Vyhrál jsi ${wonAmount} peněz! Chceš zkusit Double or Nothing?`;
+            document.getElementById('afterWinControls').style.display = 'block';
+            document.getElementById('startBtn').style.display = 'none';
+        } else {
+            message = `Nevyhrál jsi. Zkus to znovu.`;
+            document.getElementById('afterWinControls').style.display = 'none';
+            document.getElementById('startBtn').style.display = 'inline-block';
+        }
     }
 
-    // Zobrazíme výhru uživateli na stránce
-    document.getElementById('reward').innerText = `Vyhrál jsi: ${reward.name}`;
-    console.log(`Vyhrál jsi: ${reward.name}`);
+    document.getElementById('reward').innerText = message;
 
-    // Zakážeme tlačítka skořápek (aby nešlo vybrat znovu) a aktivujeme tlačítko "Začít hru" pro další kolo
+    fetch('validate.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+    }).then(res => res.json())
+      .then(data => {
+          if (data.success) updateBalance();
+      });
+
     document.querySelectorAll('.shell').forEach(btn => btn.disabled = true);
     document.getElementById('startBtn').disabled = false;
-
-    // Odeslání ID vybrané odměny na server pro validaci a uložení
-    fetch('validate.php', { // Cesta k validate.php
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            reward_id: reward.id // Posíláme ID vybrané odměny
-        })
-    })
-    .then(res => {
-        if (!res.ok) {
-            // Pokud HTTP odpověď není OK, přečteme text odpovědi pro detailnější chybu
-            return res.text().then(text => {
-                throw new Error(`Chyba serveru při ukládání výhry: ${res.status} - ${text}`);
-            });
-        }
-        return res.json(); // Zkusíme parsovat odpověď jako JSON
-    })
-    .then(data => {
-        // Zkontrolujeme, zda server vrátil úspěch nebo chybu
-        if (!data.success) {
-            console.error('Nepodařilo se uložit výhru:', data.error || 'Neznámá chyba');
-            document.getElementById('reward').innerText += ` (Chyba uložení: ${data.error || 'Neznámá chyba'})`;
-            // Pokud uživatel není přihlášen, můžete ho informovat explicitně
-            if (data.error && data.error.includes('Uživatel není přihlášen')) {
-                alert('Pro uplatnění odměny se musíte přihlásit!');
-            }
-        } else {
-            console.log('Výhra úspěšně zapsána do databáze.');
-            // fetchUserStats(); // Toto volání je Nyní odebráno
-        }
-    })
-    .catch(error => {
-        // Zachytíme jakoukoli chybu během procesu fetch/parse
-        console.error('Chyba při ukládání výhry:', error);
-        document.getElementById('reward').innerText += ` (Chyba komunikace: ${error.message || 'Neznámá chyba'})`;
-    });
+    document.getElementById('betAmountInput').disabled = false;
 }
 
-// Přiřazení obsluhy kliknutí ke všem tlačítkům s třídou 'shell'
 document.querySelectorAll('.shell').forEach(btn => {
     btn.addEventListener('click', chooseShell);
 });
+
+document.getElementById('doubleBtn').onclick = () => {
+    if (!lastWinAmount || lastWinAmount <= 0) {
+        document.getElementById('reward').innerText = 'Není co zdvojnásobit!';
+        return;
+    }
+
+    inDoubleRound = true;
+    gameReady = true;
+    shellSelected = false;
+
+    document.getElementById('afterWinControls').style.display = 'none';
+    document.getElementById('reward').innerText = 'Double or Nothing! Vyber skořápku pro šanci na zdvojnásobení!';
+    document.querySelectorAll('.shell').forEach(btn => btn.disabled = false);
+};
+
+document.getElementById('collectBtn').onclick = () => {
+    document.getElementById('afterWinControls').style.display = 'none';
+    document.getElementById('startBtn').style.display = 'inline-block';
+    document.getElementById('reward').innerText += ' Výhra připsána.';
+};

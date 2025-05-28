@@ -1,82 +1,111 @@
 <?php
-// Soubor: validate.php
-
-// Vždy nastavte Content-Type hlavičku na application/json
+session_start();
 header('Content-Type: application/json');
 
-// Potlačení zobrazení chyb pro produkční prostředí. Chyby by se měly logovat.
-ini_set('display_errors', 0);
-ini_set('display_startup_errors', 0);
-error_reporting(E_ALL); // Nastavte pro logování všech chyb
+require_once 'database.php';
 
-// Zahrňte soubor s třídou DB
-require_once 'database.php'; // Cesta k database.php
-
-// Spusťte session, abyste mohli přistupovat k $_SESSION
-session_start();
-
-$response = ['success' => false, 'error' => 'Neznámá chyba serveru.'];
+$response = ['success' => false];
 
 try {
     $db = new DB();
 
-    // Získání RAW POST dat (JSON)
     $json_data = file_get_contents('php://input');
-    $data = json_decode($json_data, true); // true pro asociativní pole
+    $data = json_decode($json_data, true);
 
-    // Zkontrolujte, zda byla data úspěšně dekódována
     if (json_last_error() !== JSON_ERROR_NONE) {
-        throw new Exception("Neplatná JSON data odeslaná klientem: " . json_last_error_msg());
+        throw new Exception("Neplatná JSON data: " . json_last_error_msg());
     }
 
-    // --- KLÍČOVÁ ZMĚNA: Získání ID uživatele z $_SESSION['user_id'] ---
-    // Toto odpovídá tomu, co ukládá váš validateLog.php.
     $user_id = $_SESSION['user_id'] ?? null;
-
-    $reward_id = $data['reward_id'] ?? null;
-
     if (!$user_id) {
         http_response_code(401);
-        throw new Exception('Uživatel není přihlášen. Prosím přihlaste se pro uplatnění odměny.');
-    }
-    if (!$reward_id) {
-        http_response_code(400);
-        throw new Exception('Chybí ID odměny.');
+        throw new Exception('Uživatel není přihlášen.');
     }
 
-    // Získat typ a hodnotu výhry z tabulky 'rewards'
-    $reward = $db->getOne("SELECT type, amount FROM rewards WHERE id = ?", [$reward_id]);
+    $bet_amount = $data['bet_amount'] ?? 0;
+    $is_win = isset($data['is_win']) && $data['is_win'] ? 1 : 0;
+    $won_amount = $data['won_amount'] ?? 0;
+    $game_type = $data['game_type'] ?? 'normal'; // 'normal' nebo 'double'
 
-    if (empty($reward)) {
-        http_response_code(404);
-        throw new Exception('Výhra s daným ID nenalezena v databázi.');
+    if (!in_array($game_type, ['normal', 'double'])) {
+        throw new Exception("Neplatný typ hry.");
     }
 
-    $type = $reward['type'];
-    $amount = (int)$reward['amount'];
+    if ($game_type === 'normal') {
+        // Normální hra: odečti sázku
+        if ($bet_amount <= 0) {
+            throw new Exception("Neplatná sázka.");
+        }
 
-    // !!! KLÍČOVÁ LOGIKA PRO UKLÁDÁNÍ PENĚZ A XP K UŽIVATELI POUZE DO TABULKY USERS !!!
-    if ($type === 'money') {
-        $db->run("UPDATE users SET money = money + ? WHERE id = ?", [$amount, $user_id]);
-        $db->log($user_id, 'reward_money', "Získal(a) $amount peněz.");
-    } elseif ($type === 'xp') {
-        $db->run("UPDATE users SET xp = xp + ? WHERE id = ?", [$amount, $user_id]);
-        $db->log($user_id, 'reward_xp', "Získal(a) $amount XP.");
-    } else {
-        error_log("Neznámý typ výhry ve validate.php: " . $type . " pro reward_id: " . $reward_id);
+        $result = $db->run("UPDATE users SET money = money - ? WHERE id = ? AND money >= ?", [
+            $bet_amount, $user_id, $bet_amount
+        ]);
+        if (!$result) {
+            throw new Exception("Nedostatek peněz nebo uživatel neexistuje.");
+        }
+        $db->log($user_id, 'game_bet', "Normální sázka: -{$bet_amount}");
+
+        if ($is_win) {
+            $result = $db->run("UPDATE users SET money = money + ? WHERE id = ?", [
+                $won_amount, $user_id
+            ]);
+            if (!$result) {
+                throw new Exception("Nepodařilo se přičíst výhru.");
+            }
+            $db->log($user_id, 'game_win', "Normální výhra: +{$won_amount}");
+        } else {
+            $db->log($user_id, 'game_loss', "Normální prohra: -{$bet_amount}");
+        }
     }
+
+    elseif ($game_type === 'double') {
+        if (!is_numeric($won_amount)) {
+            throw new Exception("Neplatná částka výhry.");
+        }
+    
+        if ($is_win) {
+            $result = $db->run("UPDATE users SET money = money + ? WHERE id = ?", [
+                $won_amount, $user_id
+            ]);
+            if (!$result) {
+                throw new Exception("Nepodařilo se přičíst double výhru.");
+            }
+            $db->log($user_id, 'double_win', "Double výhra: +{$won_amount}");
+        } else {
+            $amountToRemove = abs($won_amount);
+            $result = $db->run("UPDATE users SET money = money - ? WHERE id = ? AND money >= ?", [
+                $amountToRemove, $user_id, $amountToRemove
+            ]);
+            if (!$result) {
+                throw new Exception("Nepodařilo se odečíst prohranou výhru v Double.");
+            }
+            $db->log($user_id, 'double_loss', "Double prohra: -{$amountToRemove}");
+        }
+    }
+    
+
+    // Zaznamenej do historie
+    $sql = "INSERT INTO game_history (id_user, bet_amount, is_win, won_amount, played_at, game_type)
+            VALUES (?, ?, ?, ?, NOW(), ?)";
+    $db->run($sql, [
+        $user_id,
+        $bet_amount,
+        $is_win,
+        $won_amount,
+        $game_type
+    ]);
+
+    // Nový zůstatek
+    $new_balance = $db->getOne("SELECT money FROM users WHERE id = ?", [$user_id]);
 
     $response['success'] = true;
-    unset($response['error']);
+    $response['new_balance'] = (int)$new_balance['money'];
 
 } catch (Exception $e) {
+    http_response_code(500);
     error_log("Chyba ve validate.php: " . $e->getMessage());
-    if (http_response_code() === 200) {
-        http_response_code(500);
-    }
     $response['error'] = $e->getMessage();
 }
 
 echo json_encode($response, JSON_UNESCAPED_UNICODE);
 exit;
-?>

@@ -42,7 +42,6 @@ class DB {
     public function log($user_id, $action, $detail) {
         $sql = "INSERT INTO logs VALUES (NULL, ?, ?, ?, NOW())";
         $this->run($sql, [$user_id, $action, $detail]);
-    }
-
+    } 
 }
 ?>
