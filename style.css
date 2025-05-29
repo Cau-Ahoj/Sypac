@@ -1,14 +1,17 @@
+/*#region HRACI POLE */
 .dice_page-main {
   grid-area: main;
-  margin-right: 60px;
-  margin-left: 60px;
+  display: flex;
+  justify-content: flex-start;
   margin-top: 0px;
-  padding: 20px;
+  padding: 0%;
 }
 
 .dice_page-title {
+    position: relative;
+    right: 40%;
   font-family: Bungee;
-  text-align: center;
+  text-align:start;
   font-weight: 800;
   margin-bottom: 30px;
   font-size: 2em;
@@ -16,40 +19,24 @@
 }
 
 .dice_page-game{
-  /*
-  font-family: Open-Sans-Regular;
-  background-color: #005702;*/
+  width: 100%;
+  height: 100%;
   background-image: url("/dices/assets/kostkyStul.png");
   background-position: center;
   background-size:100% 100%;
   background-repeat: no-repeat;
-  border-radius: 15px;
-  text-align: center;
-  display: flex;
-  align-content: space-between;
-  flex-direction: column;/*
-  font-size: 1.3rem;
-  font-weight: bold;
-  color: white;
-  border: 5px solid #ddc05c;
-  box-shadow: 
-    0 0 6px #E8AC41,
-    0 0 6px #da3300;
-  
-  */
-  
+  position: relative;
 }
+/*#endregion*/
+/*#region PROMENNE*/
 
-.dice_page-game-variables{
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    margin-top:40px ;
-}
 
-.dice_page-game-variables *{
-    padding-top: 40px;
-    padding-bottom: 40px;
+.dice_page-variable{
+    /*padding-top: 40px;
+    padding-bottom: 40px;*/
+    /*position: absolute;
+    padding: 40px;*/
+    position: absolute;
     font-family: Bungee;
     text-align: center;
     font-size: 1.5em;
@@ -58,62 +45,117 @@
     0 0 6px #E8AC41;
 }
 
-.dice_page-game-dice{
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    padding-bottom: 80px;
+@media screen and (max-width: 1300px) {
+    .dice_page-variable{
+        font-size:0.8em
+    }
 }
 
-.dice_page-game-buttons{
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    padding-top: 40px;
-    padding-bottom: 20px;
+.dice_page-variable{
+    position: absolute;
+}
+.dice_page-variable#var1{
+    top:15%;
+    left:15%;   
+}
+.dice_page-variable#var2{
+    top:15%;
+    left:30%;   
+}
+.dice_page-variable#var3{
+    top:15%;
+    left:45%;   
+}
+.dice_page-variable#var4{
+    top:15%;
+    left:70%;   
+}
+/*#endregion */
+/*#region KOSTKY */
+
+
+.dice_page-dice {
+    position: absolute;
+    cursor:pointer
 }
 
-.dice_page-game-help{
-    display: flex;
-    justify-content:flex-end;
-    align-items:center;
+.dice_page-dice img {
+    width: 5vw;
 }
+.dice_page-dice#kostka1{
+    top:25%;
+    left:17%;    
+}
+
+.dice_page-dice#kostka2{
+    top:25%;
+    left:29%;
+}
+.dice_page-dice#kostka3{
+    top:25%;
+    left:41%;
+}
+.dice_page-dice#kostka4{
+    top:25%;
+    left:53%;
+}
+.dice_page-dice#kostka5{
+    top:25%;
+    left:65%;
+}
+.dice_page-dice#kostka6{
+    top:25%;
+    left: 77%;
+}
+/*#endregion */
+/*#region TLACITKA*/
+
+.dice_page-button{
+  position: absolute;
+  
+}
+.dice_page-button button{
+    background-color: #7600dc;
+    color: #ddc05c;
+    border: 2px solid #ffff00;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1rem;
+    text-transform: uppercase;
+    box-shadow: 0 0 5px #ffff00;
+    transition: background-color 0.3s, transform 0.2s;
+    font-family: Bungee;
+    text-align: center;
+    font-size: 1.5em;
+    color: #ffda6e;
+}
+.dice_page-button#roll{
+    top:60%;
+    left: 20%;
+}
+.dice_page-button#end{
+    top:60%;
+    right: 20%;
+}
+
+.dice_page-game-help {
+    position: absolute;
+    right: 7%;
+    bottom: 10%;
+}
+/*#endregion */
+/*#region PRAVIDLA TLACITKO*/
+
 .dice_page-game-help button{
     background-color: transparent;
     border-color: transparent;
     cursor: pointer;
-    margin-right: 60px;
-    margin-bottom: 40px;
+    padding: 0%;
 }
 
-.dice_page-game-buttons button {
-  margin: 10px 0;
-  padding-left: 90px;
-  padding-right: 90px;
-  padding-top: 25px;
-  padding-bottom: 25px;
-  background-color: #7600dc;
-  color: #ddc05c;
-  border: 2px solid #ffff00;
-  border-radius: 10px;
-  cursor: pointer;
-  font-size: 1rem;
-  text-transform: uppercase;
-  box-shadow: 0 0 5px #ffff00;
-  transition: background-color 0.3s, transform 0.2s;
-  font-family: Bungee;
-  text-align: center;
-  font-size: 1.5em;
-  color: #ffda6e;
-}
-.dice_page-dice img{
-    width: 80px;
-    height: 80px;
-    cursor: pointer;
-    
-}
-        
+/*#endregion */
 
+/*#region PRAVIDLA OKNO */
 .dice_page-popup-background {
     position: fixed;
     top: 25%;
@@ -126,7 +168,7 @@
     align-items: center;
 }
 .dice_page-popup-window{
-    position: absolute;
+    position: relative;
     background-image: url("/dices/assets/kostkyPravidlaStrankaB.png");
     width: 100%;
     height: 120%;
@@ -137,17 +179,17 @@
     align-items:flex-start;
     opacity: 1;
     color: #ffda6e;
+    top: 0%;
+    left: 15%;
 }
 .dice_page-popup-window p{
-  font-size: large;
+    font-size: large;
     position: absolute;
-    margin-right: 30px;
-    margin-top: 25px;
+    top: 5%;
+    right: 5%;
     cursor: pointer;
 }
 /*
-.dice_page-popup-window img{
-    width: 100%;
-    height: 100%;
+* {
+    border: 2px solid red;
 }*/
-
