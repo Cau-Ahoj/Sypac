@@ -1,0 +1,236 @@
+/* Fonty */
+@font-face {
+  font-family: Bungee;
+  src: url("../fonty/Bungee-Regular.ttf");
+}
+
+@font-face {
+  font-family: Open-Sans-ExtraBold;
+  src: url("../fonty/OpenSans-ExtraBold.ttf");
+}
+
+@font-face {
+  font-family: Open-Sans-Regular;
+  src: url("../fonty/OpenSans-Regular.ttf");
+}
+
+/* Základní vzhled */
+body {
+  background-color: #1e0041;
+  font-family: 'Open-Sans-Regular', sans-serif;
+  margin: 0;
+  padding: 0;
+  user-select: none; /* Zakáže označování */
+}
+
+h1 {
+  font-family: Bungee;
+  margin-bottom: 10px;
+  font-size: 2em;
+  color: #ffda6e;
+  text-shadow: 0 0 6px #E8AC41, 0 0 6px #da3300;
+}
+
+/* Herní hlavní plocha */
+.clicker_page-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.clicker_page-play_area {
+  background-color: #6900ca;
+  box-shadow: 0 0 25px #ffda6e;
+  padding: 2rem 3rem;
+  width: 80vw;
+  max-width: 1400px;
+  margin: 2rem auto 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 50px;
+  border-radius: 25px;
+  outline: 3px solid #ffda6e;
+  box-sizing: border-box;
+}
+
+/* Peníze */
+.clicker_page-play_area-item-1 {
+  font-family: Bungee;
+  font-size: 1.5em;
+  color: #ffda6e;
+  text-shadow: 0 0 6px #E8AC41, 0 0 6px #da3300;
+}
+
+/* Herní pole skořápek */
+.shell-buttons {
+  position: relative;
+  width: 390px;
+  height: 120px;
+  margin: 0 auto;
+}
+
+/* Jednotlivá skořápka */
+.shell {
+  position: absolute;
+  top: 0;
+  transition: left 0.4s ease-in-out, transform 0.3s ease;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.shell img:first-child {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  pointer-events: none;
+}
+
+/* Míček */
+.ball {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  display: none;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.ball1.shown,
+.ball2.shown,
+.ball3.shown {
+  display: block;
+  z-index: 10;
+  left: 30px;
+}
+
+/* Animace */
+.shell.lift {
+  animation: liftShell 0.4s ease forwards;
+}
+
+@keyframes liftShell {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-60px); }
+}
+
+.shell.drop {
+  animation: dropShell 0.3s ease forwards;
+}
+
+@keyframes dropShell {
+  0% { transform: translateY(-60px); }
+  100% { transform: translateY(0); }
+}
+
+/* Ovládací prvky */
+.game-controls {
+  transition: opacity 0.5s ease;
+}
+
+.game-controls.hidden {
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+}
+
+.bet-input-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.bet-input-group label {
+  font-family: 'Open-Sans-ExtraBold', sans-serif;
+  font-size: 1.2em;
+  color: #ffda6e;
+  text-shadow: 0 0 6px #E8AC41, 0 0 6px #da3300;
+}
+
+.bet-input-group input {
+  padding: 10px;
+  font-size: 1.2em;
+  border: 2px solid #ffda6e;
+  border-radius: 10px;
+  background-color: #1e0041;
+  color: #ffda6e;
+  width: 100px;
+  transition: border-color 0.3s ease;
+}
+
+.bet-input-group input:focus {
+  outline: none;
+  border-color: #ffda6e;
+  box-shadow: 0 0 10px rgba(255, 218, 110, 0.8);
+}
+
+/* Tlačítka */
+.game-controls button {
+  background-color: #ffda6e;
+  color: #1e0041;
+  font-family: 'Bungee', sans-serif;
+  font-size: 1.5em;
+  padding: 15px 30px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  transition: background-color 0.3s ease;
+  text-transform: uppercase;
+}
+
+.game-controls button:hover {
+  background-color: #E8AC41;
+}
+
+/* Double / Collect sekce */
+#afterWinControls {
+  margin-top: 20px;
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+}
+
+#afterWinControls button {
+  background-color: #5603aa;
+  color: white;
+  font-size: 1.2em;
+  padding: 10px 25px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  width: auto;
+  box-shadow: 0 0 15px rgba(255, 218, 110, 0.6);
+}
+
+#afterWinControls button:hover {
+  background-color: #ffda6e;
+  color: #1e0041;
+  box-shadow: 0 0 25px rgba(255, 218, 110, 0.9);
+}
+
+#afterWinControls button:active {
+  transform: scale(0.98);
+}
+
+/* Text */
+p {
+  font-family: 'Open-Sans-ExtraBold', sans-serif;
+  font-size: 1.2em;
+  color: #ffda6e;
+  text-shadow: 0 0 6px #E8AC41, 0 0 6px #da3300;
+}
+body {
+  user-select: none;
+}
+.disabled-shells {
+  pointer-events: none;
+}
